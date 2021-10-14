@@ -18,7 +18,7 @@ This repository contains:
 - `results/` - Directory containing official results from experiments
 - `dataset/` - Directory containing metadata files for the dataset
 
-All models are implemented in PyTorch. The training scripts are implemented using [ptpt](github.com/vvvm23/ptpt) - a lightweight framework around PyTorch.
+All models are implemented in PyTorch. The training scripts are implemented using [ptpt](https://github.com/vvvm23/ptpt) - a lightweight framework around PyTorch.
 
 ## Installation
 `TODO: setup instructions`
