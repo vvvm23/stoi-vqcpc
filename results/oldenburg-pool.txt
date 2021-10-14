@@ -1,0 +1,32 @@
+> processing ground truth
+> processing prediction 'VQ-CPC'
+> processing prediction 'Single'
+> processing prediction 'Concat'
+> processing prediction 'BSIM20'
+> processing prediction 'STOI'
+> 'VQ-CPC' results:
+        MSE:    0.009466022364012838    BEST
+        LCC:    0.8112786804863431      BEST
+        SRCC:   0.912904736157688       BEST
+
+> 'Single' results:
+        MSE:    0.017356477453060837    
+        LCC:    0.5669359458899829      
+        SRCC:   0.7145576430783765      
+
+> 'Concat' results:
+        MSE:    0.015882888482814578    
+        LCC:    0.6175202400621532      
+        SRCC:   0.7216649416890962      
+
+> 'BSIM20' results:
+        MSE:    0.011970530428513248    
+        LCC:    0.7589079663639627      
+        SRCC:   0.7234740382757038      
+
+> 'STOI' results:
+        MSE:    0.02559892196943333     
+        LCC:    0.17761521897320767     
+        SRCC:   0.28416177547994154     
+
+> saving plot to oldenburg-pool.pdf

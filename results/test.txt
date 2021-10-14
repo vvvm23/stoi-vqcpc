@@ -1,0 +1,31 @@
+> processing ground truth
+> processing prediction 'vqcpc/results_stoi-gru128-kmeans_test-gru128-latents_2021-09-16_13-52-47.csv'
+> processing prediction 'stoi_benchmark/test_set/meta.csv'
+> processing prediction 'dbstoi-baseline/results_baseline-frame-concat_test-set_2021-09-16_13-47-16.csv'
+> processing prediction 'dbstoi-baseline/results_baseline-frame-single_test-set_2021-09-16_13-48-16.csv'
+> processing prediction 'dbstoi-baseline/results_baseline-frame-rossbach_rossbach-test-set_2021-09-16_17-30-30.csv'
+> 'vqcpc/results_stoi-gru128-kmeans_test-gru128-latents_2021-09-16_13-52-47.csv' results:
+        MSE:    0.004693260180297806    BEST
+        LCC:    0.9147831115918579      BEST
+        SRCC:   0.924538260823286       BEST
+
+> 'stoi_benchmark/test_set/meta.csv' results:
+        MSE:    0.01992407789133588     
+        LCC:    0.7569699543247163      
+        SRCC:   0.7329292905003643      
+
+> 'dbstoi-baseline/results_baseline-frame-concat_test-set_2021-09-16_13-47-16.csv' results:
+        MSE:    0.006575243628337397    
+        LCC:    0.8790009747096775      
+        SRCC:   0.8716400862307303      
+
+> 'dbstoi-baseline/results_baseline-frame-single_test-set_2021-09-16_13-48-16.csv' results:
+        MSE:    0.007980118030618339    
+        LCC:    0.8536341207416848      
+        SRCC:   0.8170111457309561      
+
+> 'dbstoi-baseline/results_baseline-frame-rossbach_rossbach-test-set_2021-09-16_17-30-30.csv' results:
+        MSE:    0.009866719570775876    
+        LCC:    0.8155563230142874      
+        SRCC:   0.8196565854620266      
+

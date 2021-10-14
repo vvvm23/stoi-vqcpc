@@ -1,0 +1,31 @@
+> processing ground truth
+> processing prediction 'vqcpc/results_stoi-gru128-kmeans_oldenburg-gru128-latents_2021-09-16_13-53-55.csv'
+> processing prediction 'stoi_benchmark/oldenburg_set/meta.csv'
+> processing prediction 'dbstoi-baseline/results_baseline-frame-concat_oldenburg-set_2021-09-16_13-49-28.csv'
+> processing prediction 'dbstoi-baseline/results_baseline-frame-single_oldenburg-set_2021-09-16_13-50-01.csv'
+> processing prediction 'dbstoi-baseline/results_baseline-frame-rossbach_rossbach-oldenburg-set_2021-09-16_17-31-21.csv'
+> 'vqcpc/results_stoi-gru128-kmeans_oldenburg-gru128-latents_2021-09-16_13-53-55.csv' results:
+        MSE:    0.01854306604951755     
+        LCC:    0.5629720679955453      
+        SRCC:   0.7774010330001958      
+
+> 'stoi_benchmark/oldenburg_set/meta.csv' results:
+        MSE:    0.02559892196943333     
+        LCC:    0.17761521897320828     
+        SRCC:   0.28416177547994154     
+
+> 'dbstoi-baseline/results_baseline-frame-concat_oldenburg-set_2021-09-16_13-49-28.csv' results:
+        MSE:    0.018196789983886817    
+        LCC:    0.5567962589505846      
+        SRCC:   0.7116126988057588      
+
+> 'dbstoi-baseline/results_baseline-frame-single_oldenburg-set_2021-09-16_13-50-01.csv' results:
+        MSE:    0.016487905057968343    
+        LCC:    0.60590820118114        
+        SRCC:   0.7128790243413702      
+
+> 'dbstoi-baseline/results_baseline-frame-rossbach_rossbach-oldenburg-set_2021-09-16_17-31-21.csv' results:
+        MSE:    0.01428995569261644     BEST
+        LCC:    0.6815856672846129      BEST
+        SRCC:   0.809424827240024       BEST
+

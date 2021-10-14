@@ -1,0 +1,32 @@
+> processing ground truth
+> processing prediction 'VQ-CPC'
+> processing prediction 'Single'
+> processing prediction 'Concat'
+> processing prediction 'BSIM20'
+> processing prediction 'STOI'
+> 'VQ-CPC' results:
+        MSE:    0.005310102816407536    BEST
+        LCC:    0.9056081439259055      BEST
+        SRCC:   0.9211473330894118      BEST
+
+> 'Single' results:
+        MSE:    0.012941368369807575    
+        LCC:    0.7463259259707784      
+        SRCC:   0.7420115887740313      
+
+> 'Concat' results:
+        MSE:    0.015225857403054821    
+        LCC:    0.7028643008367236      
+        SRCC:   0.7344519699884277      
+
+> 'BSIM20' results:
+        MSE:    0.01644690179317808     
+        LCC:    0.6604604816929316      
+        SRCC:   0.6751574313922696      
+
+> 'STOI' results:
+        MSE:    0.01992407789133588     
+        LCC:    0.7569699543247163      
+        SRCC:   0.7329292905003643      
+
+> saving plot to test-pool.pdf
