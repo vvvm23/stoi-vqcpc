@@ -114,3 +114,109 @@ class WaveDataset(torch.utils.data.Dataset):
         if self.return_file:
             return wav, self.root / self.wav_files[idx]
         return wav
+
+class ConcatDataset(torch.utils.data.Dataset):
+    def __init__(self,
+            root: str,
+            sample_rate: int = 16_000,
+            return_file: bool = False,
+        ):
+        super().__init__()
+        if isinstance(root, str):
+            root = Path(root)
+        self.root = root
+        meta_file = root / 'meta.csv'
+
+        self.sample_rate = sample_rate
+        self.return_file = return_file
+
+        self.augmentations = Compose(
+            transforms = [
+                ShuffleChannels(p=0.5),
+                PolarityInversion(p=0.5),
+            ]
+        )
+
+        self.melspec_transform = torchaudio.transforms.MelSpectrogram(
+            sample_rate=self.sample_rate,
+            n_fft=512,
+            n_mels=40,
+            f_max=8000,
+            win_length=320,
+            hop_length=160,
+        )
+        self.delta_transform = torchaudio.functional.compute_deltas
+
+        f = open(meta_file, mode='r')
+        csv_reader = csv.reader(f)
+        self.wav_score = [(n, s) for n, *_, s in csv_reader]
+        f.close()
+
+    def __len__(self):
+        return len(self.wav_score)
+
+    def __getitem__(self, idx):
+        wav, rate = torchaudio.load(self.root / self.wav_score[idx][0])
+        assert rate == self.sample_rate, "sample rate did not match" # TODO: do we need to have a rate attribute?
+        wav = self.augmentations(wav.unsqueeze(0), sample_rate=rate).squeeze(0)
+        f = self.melspec_transform(wav)
+        fd = self.delta_transform(f)
+        fdd = self.delta_transform(fd)
+
+        feature = torch.cat([f,fd,fdd], dim=1).permute(2, 0, 1) # 240-dim feature
+        if self.return_file:
+            return feature, float(self.wav_score[idx][1]), self.root / self.wav_score[idx][0] 
+        return feature, float(self.wav_score[idx][1])
+
+class FirstChannelDataset(torch.utils.data.Dataset):
+    def __init__(self,
+            root: str,
+            sample_rate: int = 16_000,
+            return_file: bool = False,
+        ):
+        super().__init__()
+        if isinstance(root, str):
+            root = Path(root)
+        self.root = root
+        meta_file = root / 'meta.csv'
+
+        self.sample_rate = sample_rate
+        self.return_file = return_file
+
+        self.augmentations = Compose(
+            transforms = [
+                PolarityInversion(p=0.5),
+            ]
+        )
+
+        self.melspec_transform = torchaudio.transforms.MelSpectrogram(
+            sample_rate=self.sample_rate,
+            n_fft=512,
+            n_mels=40,
+            f_max=8000,
+            win_length=320,
+            hop_length=160,
+        )
+        self.delta_transform = torchaudio.functional.compute_deltas
+
+        f = open(meta_file, mode='r')
+        csv_reader = csv.reader(f)
+        self.wav_score = [(n, s) for n, *_, s in csv_reader]
+        f.close()
+
+    def __len__(self):
+        return len(self.wav_score)
+
+    def __getitem__(self, idx):
+        wav, rate = torchaudio.load(self.root / self.wav_score[idx][0])
+        assert rate == self.sample_rate, "sample rate did not match" # TODO: do we need to have a rate attribute?
+        wav = wav[0] # only take first channel
+        wav = self.augmentations(wav.view(1, 1, -1), sample_rate=rate).squeeze(0)
+        f = self.melspec_transform(wav)
+        fd = self.delta_transform(f)
+        fdd = self.delta_transform(fd)
+
+        feature = torch.cat([f,fd,fdd], dim=1).permute(2, 0, 1) # 120-dim feature
+        if self.return_file:
+            return feature, float(self.wav_score[idx][1]), self.root / self.wav_score[idx][0] 
+        return feature, float(self.wav_score[idx][1])
