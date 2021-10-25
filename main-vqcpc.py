@@ -59,18 +59,6 @@ def main(args):
     if args.resume:
         trainer.load_checkpoint(args.resume)
 
-    if cfg.vqcpc['quantize_codes'] and cfg.vqcpc['quantize_mode'] == 'gumbel':
-        def gumbel_callback(trainer):
-            ts = trainer.nb_updates
-            trainer.net.codebook.update_tau(ts)
-            debug(f"decaying tau in gumbel quantizer. tau: {trainer.net.codebook.tau}")
-
-        trainer.register_callback(
-            CallbackType.ParameterUpdate, 
-            gumbel_callback, 
-            frequency=100
-        )
-
     trainer.train()
 
 if __name__ == '__main__':

@@ -2,15 +2,12 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-import numpy as np
-
 from typing import List, Tuple
-from functools import lru_cache, partial
 
 from .utils import HelperModule
 from .encoder import Encoder
-from .vqvae import EMAQuantizer, GumbelQuantizer
-from .aggregator import AggregatorGPT, AggregatorGRU
+from .vqvae import EMAQuantizer
+from .aggregator import AggregatorGRU
 from .nce import InfoNCE
 
 class WaveVQCPC(HelperModule):
@@ -27,16 +24,11 @@ class WaveVQCPC(HelperModule):
             encoder_norm_mode:          str = 'batch',
 
             quantize_codes:             bool = True,
-            quantize_mode:              str = 'kmeans',
-            gumbel_temp:                Tuple[float] = (1.0, 1.0, 1.0),
             nb_code_entries:            int = 512,
             embedding_dim:              int = 64,
 
             aggregator_dim:             int = 256,
             aggregator_layers:          int = 2,
-            aggregator_mode:            str = 'attn',
-            aggregator_mlp_dim:         int = 256,
-            aggregator_seq_len:         int = 128,
             
             nce_steps:                  int = 12,
             nb_negatives:               int = 10,
@@ -56,7 +48,6 @@ class WaveVQCPC(HelperModule):
             embedding_dim: size of feature vectors in codebook
 
             aggregator_dim: dimension of aggregator output (GRU channels, attention dim, etc.)
-            aggregator_mode: switch to GPT/conv/GRU aggregator (not implemented)
 
             nce_steps: number of InfoNCE steps in the future to consider
             nb_negatives: number of negative samples to get per step
@@ -65,9 +56,7 @@ class WaveVQCPC(HelperModule):
         """
         
         ALLOWED_AGGREGATOR = ['gru', 'attn']
-        ALLOWED_QUANTIZER = ['kmeans', 'gumbel']
         assert aggregator_mode in ALLOWED_AGGREGATOR, f"invalid aggregator mode. expected one of: '{ALLOWED_AGGREGATOR}'"
-        assert quantize_mode in ALLOWED_QUANTIZER, f"invalid quantization mode. expected one of: '{ALLOWED_QUANTIZER}'"
 
         self.encoder = Encoder(
             in_channels = in_channels,
@@ -81,33 +70,16 @@ class WaveVQCPC(HelperModule):
 
         self.codebook = None
         if quantize_codes:
-            if quantize_mode == 'kmeans':
-                self.codebook = EMAQuantizer(
-                    nb_entries = nb_code_entries,
-                    embedding_dim = embedding_dim,
-                )
-            elif quantize_mode == 'gumbel':
-                self.codebook = GumbelQuantizer(
-                    nb_entries = nb_code_entries,
-                    tau = gumbel_temp,
-                    embedding_dim = embedding_dim,
-                )
+            self.codebook = EMAQuantizer(
+                nb_entries = nb_code_entries,
+                embedding_dim = embedding_dim,
+            )
 
-        if aggregator_mode == 'gru':
-            self.aggregator = AggregatorGRU(
-                in_channels = embedding_dim,
-                hidden_channels = aggregator_dim,
-                nb_layers = aggregator_layers,
-            )
-        elif aggregator_mode == 'attn':
-            self.aggregator = AggregatorGPT(
-                embed_dim = embedding_dim,
-                out_dim = aggregator_dim,
-                mlp_dim = aggregator_mlp_dim,
-                nb_layers = aggregator_layers,
-                seq_len = aggregator_seq_len,
-                dropout = dropout,
-            )
+        self.aggregator = AggregatorGRU(
+            in_channels = embedding_dim,
+            hidden_channels = aggregator_dim,
+            nb_layers = aggregator_layers,
+        )
 
         self.infonce = InfoNCE(
             c_dim = aggregator_dim, 

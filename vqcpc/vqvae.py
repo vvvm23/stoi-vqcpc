@@ -30,7 +30,6 @@ class EMAQuantizer(HelperModule):
 
     @torch.cuda.amp.autocast(enabled=False)
     def forward(self, x: torch.FloatTensor):
-        # x = self.conv_in(x.float()).permute(0,2,3,1)
         x = x.float()
         flatten = x.reshape(-1, self.embedding_dim)
         dist = (
@@ -65,36 +64,3 @@ class EMAQuantizer(HelperModule):
 
     def embed_code(self, embed_id: torch.LongTensor) -> torch.FloatTensor:
         return F.embedding(embed_id, self.embedding.transpose(0, 1))
-
-class GumbelQuantizer(HelperModule):
-    def build(self,
-            nb_entries: int,
-            embedding_dim: int,
-            tau: Tuple[float, float, float] = (1.0, 1.0, 1.0),
-        ):
-        self.embedding_dim = embedding_dim
-        self.nb_entries = nb_entries
-        embedding = torch.Tensor(nb_entries, embedding_dim)
-        embedding.uniform_(-1/nb_entries, 1/nb_entries)
-        self.register_parameter('embedding', nn.Parameter(embedding))
-
-        self.logit_proj = nn.Linear(embedding_dim, nb_entries)
-
-        assert len(tau) == 3, "temperature parameter must be a 3-tuple"
-        self.max_tau, self.min_tau, self.tau_decay = tau
-        self.tau = self.max_tau
-
-    def update_tau(self, ts):
-        self.tau = max(self.max_tau*exp(-self.tau_decay*ts), self.min_tau)
-
-    def forward(self, x):
-        N, T, _ = x.shape
-        x = self.logit_proj(F.relu(x).view(-1, self.embedding_dim))
-        if self.training:
-            x = F.gumbel_softmax(x.float(), tau=self.tau, hard=True).type_as(x)
-        else:
-            x = F.one_hot(x.argmax(dim=-1), num_classes=self.nb_entries).type_as(x)
-        idx = x.argmax(dim=-1)
-
-        x = x @ self.embedding
-        return x.view(N, T, -1), 0.0, idx
