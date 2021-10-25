@@ -1,5 +1,5 @@
 # Non-Intrusive Speech Intelligibility Prediction from Discrete Latent Representations
-Official repository for paper "Non-Intrusive Speech Intelligibility Prediction from Discrete Latent Representations"
+Official repository for paper "Non-Intrusive Speech Intelligibility Prediction from Discrete Latent Representations".
 
 We predict the intelligibility of binaural speech signals by first extracting latent representations from raw audio. Then, a lightweight predictor over these latent representations can be trained. This results in improved performance over predicting on spectral features of the audio, despite the feature extractor not being explicitly trained for this task. In certain cases, a single layer is sufficient for strong correlations between the predictions and the ground-truth scores.
 
@@ -90,7 +90,21 @@ Other useful arguments:
 ```
 
 ### STOI Predictor Training
-`TODO: usage instructions`
+Begin intelligibility score predictor training script using configuration in `config.toml`:
+```
+python main-stoi.py --cfg-path config.toml
+```
+
+Other useful arguments:
+```
+--resume            # resume from specified checkpoint
+--no-save           # do not save training progress (useful for debugging)
+--no-cuda           # do not try to access CUDA device (very slow)
+--no-amp            # disable automatic mixed precision (if you encounter NaN)
+--nb-workers        # number of workers for for data loading (default: 8)
+--detect-anomaly    # detect autograd anomalies and terminate if encountered
+--seed              # random seed (default: 12345)
+```
 
 ### Predictor Evaluation
 `TODO: usage instructions`
