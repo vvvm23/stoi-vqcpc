@@ -26,19 +26,77 @@ All models are implemented in PyTorch. The training scripts are implemented usin
 ## Usage
 
 ### VQ-CPC Training
-`TODO: usage instructions`
+Begin VQ-CPC training using the configuration defined in `config.toml`:
+
+```
+python main-vqcpc.py --cfg-path config-path.toml
+```
+
+Other useful arguments:
+```
+--resume            # resume from specified checkpoint
+--no-save           # do not save training progress (useful for debugging)
+--no-cuda           # do not try to access CUDA device (very slow)
+--no-amp            # disable automatic mixed precision (if you encounter NaN)
+--nb-workers        # number of workers for for data loading (default: 8)
+--detect-anomaly    # detect autograd anomalies and terminate if encountered
+--seed              # random seed (default: 12345)
+```
 
 ### Latent Dataset Generation
-`TODO: usage instructions`
+Begin latent dataset generation using pre-trained VQCPC `model-checkpoint.pt`
+from dataset `wav-dataset` and output to `latent-dataset` using configuration
+defined in `config.toml`:
+
+```
+python create-latents.py model-checkpoint.pt wav-dataset latent-dataset --cfg-path config.toml
+```
+
+As above, but distributed across `n` processes with script rank `r`:
+```
+python create-latents.py model-checkpoint.pt wav-dataset latent-dataset --cfg-path config.toml --array-size n --array-rank r
+```
+
+Other useful arguments:
+```
+--no-cuda           # do not try to access CUDA device (very slow)
+--no-amp            # disable automatic mixed precision (if you encounter NaN)
+--no-tqdm           # disable progress bars
+--detect-anomaly    # detect autograd anomalies and terminate if encountered
+-n                  # alias for `--array-size`
+-r                  # alias for `--array-rank`
+```
 
 ### Latent Plotting
-`TODO: usage instructions`
+Begin interactive VQCPC latent visualisation script using pre-trained model `model-checkpoint.pt` on dataset `wav-dataset` using configuration defined in `config.toml`:
+```
+python plot-latents.py model-checkpoint.pt wav-dataset --cfg-path config.toml
+```
+
+If you additionally have a pre-trained, per-frame STOI score predictor (not
+SeqPool predictor) you can specify the checkpoint `stoi-checkpoint.pt` and
+additional configuration `stoi-config.toml`, you can plot per-frame scores
+alongside the waveform and latent features:
+```
+python plot-latents.py model-checkpoint.pt wav-dataset --cfg-path config.toml --stoi stoi-checkpoint.pt --stoi-cfg stoi-config.toml
+```
+
+Other useful arguments:
+```
+--no-cuda           # do not try to access CUDA device (very slow)
+--no-amp            # disable automatic mixed precision (if you encounter NaN)
+--cmap              # define matplotlib colourmap
+--style             # define matplotlib style
+```
 
 ### STOI Predictor Training
 `TODO: usage instructions`
 
 ### Predictor Evaluation
 `TODO: usage instructions`
+
+## Configuration
+`TODO: add configuration instructions`
 
 ## Checkpoints
 `TODO: add trained checkpoints`
