@@ -126,6 +126,12 @@ Other useful arguments:
 --seed              # random seed (default: 12345)
 ```
 
+### Overall Evaluation
+Compare results from many results files produced by `main-test.py` based on dataset ground truth:
+```
+python compute-correlations.py ground-truth.csv pred-1.csv ... pred-n.csv --names pred-1 ... pred-n
+```
+
 ## Configuration
 `TODO: add configuration instructions`
 
