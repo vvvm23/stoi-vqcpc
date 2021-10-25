@@ -34,6 +34,8 @@ class WaveVQCPC(HelperModule):
             nb_negatives:               int = 10,
 
             dropout:                    float = 0.1,
+
+            **kwargs
         ):
         """
         `WaveVQCPC` initialisation function
@@ -55,9 +57,6 @@ class WaveVQCPC(HelperModule):
             dropout: dropout rate
         """
         
-        ALLOWED_AGGREGATOR = ['gru', 'attn']
-        assert aggregator_mode in ALLOWED_AGGREGATOR, f"invalid aggregator mode. expected one of: '{ALLOWED_AGGREGATOR}'"
-
         self.encoder = Encoder(
             in_channels = in_channels,
             hidden_channels = encoder_channels,

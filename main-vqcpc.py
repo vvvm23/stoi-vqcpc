@@ -69,7 +69,7 @@ if __name__ == '__main__':
     parser.add_argument('--no-cuda', action='store_true')
     parser.add_argument('--no-amp', action='store_true')
     parser.add_argument('--nb-workers', type=int, default=8)
-    parser.add_argument('--detect-anomaly', action='store_true') # menacing aura!
+    parser.add_argument('--detect-anomaly', action='store_true') 
     parser.add_argument('--seed', type=int, default=12345)
     args = parser.parse_args()
 
