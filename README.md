@@ -107,7 +107,24 @@ Other useful arguments:
 ```
 
 ### Predictor Evaluation
-`TODO: usage instructions`
+Begin evaluation of a pre-trained STOI score predictor using checkpoint
+`stoi-checkpoint.pt` on dataset `dataset-root` using configuration in
+`stoi-config.toml`:
+```
+python main-test.py stoi-checkpoint.pt dataset-root --cfg-path stoi-config.toml
+```
+
+Other useful arguments:
+```
+--no-save           # do not save training progress (useful for debugging)
+--no-cuda           # do not try to access CUDA device (very slow)
+--no-amp            # disable automatic mixed precision (if you encounter NaN)
+--no-tqdm           # disable progress bars
+--nb-workers        # number of workers for for data loading (default: 8)
+--detect-anomaly    # detect autograd anomalies and terminate if encountered
+--batch-size        # control dataloader batch size
+--seed              # random seed (default: 12345)
+```
 
 ## Configuration
 `TODO: add configuration instructions`
