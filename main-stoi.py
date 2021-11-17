@@ -95,7 +95,7 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cfg-path', type=str, default='config/debug.toml')
+    parser.add_argument('--cfg-path', type=str, default='config/vqcpc/stoi-gru128-pool-kmean.toml')
     parser.add_argument('--resume', type=str, default=None)
     parser.add_argument('--no-save', action='store_true')
     parser.add_argument('--no-cuda', action='store_true')

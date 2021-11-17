@@ -79,7 +79,7 @@ if __name__ == '__main__':
     parser.add_argument('model_path', type=str)
     parser.add_argument('data_dir', type=str)
     parser.add_argument('out_dir', type=str)
-    parser.add_argument('--cfg-path', type=str, default='config/vqcpc/debug.toml')
+    parser.add_argument('--cfg-path', type=str, default='config/vqcpc/vqcpc-gru128-kmean.toml')
     parser.add_argument('--no-cuda', action='store_true')
     parser.add_argument('--no-amp', action='store_true')
     parser.add_argument('--no-tqdm', action='store_true')

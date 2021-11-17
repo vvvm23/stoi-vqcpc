@@ -140,7 +140,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('checkpoint', type=str)
     parser.add_argument('data_root', type=str)
-    parser.add_argument('--cfg-path', type=str, default='config/vqcpc/debug.toml')
+    parser.add_argument('--cfg-path', type=str, default='config/vqcpc/vqcpc-gru128-kmean.toml')
     parser.add_argument('--no-cuda', action='store_true')
     parser.add_argument('--no-amp', action='store_true')
     parser.add_argument('--cmap', type=str, default='viridis')
