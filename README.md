@@ -142,4 +142,4 @@ We use `toml` files to define configurations. Each one consists of three section
 Pretrained checkpoints for all models can be found [here](checkpoints/)
 
 ### Citation
-`TODO: add citation`
+`TODO: add citation once paper published / arXiv-ed :)`
