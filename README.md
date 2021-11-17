@@ -130,7 +130,12 @@ python compute-correlations.py ground-truth.csv pred-1.csv ... pred-n.csv --name
 ```
 
 ## Configuration
-`TODO: add configuration instructions`
+Examples configurations for all experiments can be found [here](config/)
+
+We use `toml` files to define configurations. Each one consists of three sections:
+- `[trainer]`: configuration options for `ptpt.TrainerConfig`.
+- `[data]`: configuration options for the dataset.
+- `[vqcpc]` or `[stoi]`: configuration options for the VQCPC and predictor models respectively.
 
 ## Checkpoints
 
