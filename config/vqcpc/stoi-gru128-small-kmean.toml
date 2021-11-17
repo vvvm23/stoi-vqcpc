@@ -1,0 +1,22 @@
+[trainer]
+    exp_name = 'stoi-gru128-small-kmeans'
+    batch_size = 256
+    nb_batches = [32, 8]
+    max_steps = 50_000
+    learning_rate = 0.001
+    checkpoint_frequency = 1000
+    metric_names = ['lcc', 'srcc']
+    lr_scheduler_name = 'multi'
+    lr_milestones = [20_000, 40_000]
+    lr_gamma = 0.1
+
+[data]
+    train_root = '/gss/work/wexe3044/train-latents_gru128-kmeans'
+    dev_root = '/gss/work/wexe3044/dev-latents_gru128-kmeans'
+
+[model]
+    in_dim = 128
+    norm = false
+    sig_out = true
+    dropout = 0.1
+    small = true

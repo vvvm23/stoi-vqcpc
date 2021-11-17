@@ -1,0 +1,43 @@
+[trainer]
+    exp_name = 'gru128-kmeans'
+    batch_size = 192
+    nb_batches = [64, 16]
+    max_steps = 100_000
+    learning_rate = 0.0004
+    checkpoint_frequency = 5000
+    metric_names = ['nce_loss', 'latent_loss', 'nce_acc']
+    lr_scheduler_name = 'multi'
+    lr_milestones = [30_000, 70_000]
+    lr_gamma = 0.5
+
+[data]
+    root = '/gss/work/wexe3044'
+    nb_samples = 40960
+    sample_rate = 16000
+    shuffle_prob = 0.5
+    polarity_prob = 0.5
+    noise_prob = 0.5
+    gain_prob = 0.5
+
+[vqcpc]
+    in_channels = 2
+    encoder_channels = 256
+    encoder_kernel_strides = [5, 4, 2, 2, 2]
+    encoder_kernel_sizes = [10, 8, 4, 4, 4]
+    encoder_norm_mode = 'batch'
+
+    quantize_codes = true
+    quantize_mode = 'kmeans'
+    gumbel_temp = [2.0, 0.5, 5e-5]
+    nb_code_entries = 512
+    embedding_dim = 128
+
+    aggregator_dim = 128
+    aggregator_layers = 2
+    aggregator_mode = 'gru'
+    aggregator_seq_len = 256
+
+    nce_steps = 12
+    nb_negatives = 10
+
+    dropout = 0.1

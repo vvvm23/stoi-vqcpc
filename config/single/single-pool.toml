@@ -1,0 +1,26 @@
+[trainer]
+    exp_name = 'baseline-pool-single'
+    batch_size = 256
+    nb_batches = [32, 8]
+    max_steps = 50_000
+    learning_rate = 0.001
+    checkpoint_frequency = 1000
+    metric_names = ['lcc', 'srcc']
+    lr_scheduler_name = 'multi'
+    lr_milestones = [20_000, 40_000]
+    lr_gamma = 0.1
+
+[data]
+    mode = 'single'
+    train_root = '/gss/work/wexe3044/training_set'
+    dev_root = '/gss/work/wexe3044/development_set'
+    sample_rate = 16000
+
+[model]
+    mode = 'linear'
+    in_dim = 120
+    dropout = 0.3
+    norm = false
+    sig_out = true
+    small = false
+    pool = true
