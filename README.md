@@ -20,9 +20,6 @@ This repository contains:
 
 All models are implemented in PyTorch. The training scripts are implemented using [ptpt](https://github.com/vvvm23/ptpt) - a lightweight framework around PyTorch.
 
-## Installation
-`TODO: setup instructions`
-
 ## Usage
 
 ### VQ-CPC Training
@@ -136,7 +133,8 @@ python compute-correlations.py ground-truth.csv pred-1.csv ... pred-n.csv --name
 `TODO: add configuration instructions`
 
 ## Checkpoints
-`TODO: add trained checkpoints`
+
+Pretrained checkpoints for all models can be found [here](checkpoints/)
 
 ### Citation
 `TODO: add citation`
