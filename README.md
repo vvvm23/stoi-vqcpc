@@ -17,6 +17,7 @@ This repository contains:
 - `config/` - Directory containing various configuration files for experiments
 - `results/` - Directory containing official results from experiments
 - `dataset/` - Directory containing metadata files for the dataset
+- `data-generator/` - Directory containing dataset generation scripts (MATLAB)
 
 All models are implemented in PyTorch. The training scripts are implemented using [ptpt](https://github.com/vvvm23/ptpt) - a lightweight framework around PyTorch.
 
