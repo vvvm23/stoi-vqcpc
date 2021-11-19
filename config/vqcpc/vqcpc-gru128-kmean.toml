@@ -27,15 +27,11 @@
     encoder_norm_mode = 'batch'
 
     quantize_codes = true
-    quantize_mode = 'kmeans'
-    gumbel_temp = [2.0, 0.5, 5e-5]
     nb_code_entries = 512
     embedding_dim = 128
 
     aggregator_dim = 128
     aggregator_layers = 2
-    aggregator_mode = 'gru'
-    aggregator_seq_len = 256
 
     nce_steps = 12
     nb_negatives = 10

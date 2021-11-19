@@ -20,3 +20,4 @@
     sig_out = true
     dropout = 0.1
     small = true
+    pool = false

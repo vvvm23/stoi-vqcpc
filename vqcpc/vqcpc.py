@@ -13,7 +13,6 @@ from .nce import InfoNCE
 class WaveVQCPC(HelperModule):
     """
     `nn.Module` implementing VQ-CPC on raw audio waveforms.
-    It is a mixture of a few implementations. They will be cited later.
     """
     def build(self,
             in_channels:                int = 2,

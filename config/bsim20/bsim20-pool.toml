@@ -12,8 +12,8 @@
 
 [data]
     mode = 'single'
-    train_root = '/gss/work/wexe3044/rossbach/training_set'
-    dev_root = '/gss/work/wexe3044/rossbach/development_set'
+    train_root = '/gss/work/wexe3044/bsim20/training_set'
+    dev_root = '/gss/work/wexe3044/bsim20/development_set'
     sample_rate = 16000
 
 [model]
