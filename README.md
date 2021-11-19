@@ -1,4 +1,5 @@
 # Non-Intrusive Speech Intelligibility Prediction from Discrete Latent Representations
+
 Official repository for paper "Non-Intrusive Speech Intelligibility Prediction from Discrete Latent Representations".
 
 We predict the intelligibility of binaural speech signals by first extracting latent representations from raw audio. Then, a lightweight predictor over these latent representations can be trained. This results in improved performance over predicting on spectral features of the audio, despite the feature extractor not being explicitly trained for this task. In certain cases, a single layer is sufficient for strong correlations between the predictions and the ground-truth scores.
@@ -20,6 +21,9 @@ This repository contains:
 - `data-generator/` - Directory containing dataset generation scripts (MATLAB)
 
 All models are implemented in PyTorch. The training scripts are implemented using [ptpt](https://github.com/vvvm23/ptpt) - a lightweight framework around PyTorch.
+
+*Visualisation of binaural waveform, predicted per-frame STOI, and latent representation:*
+![Visualisation of binaural waveform, predicted per-frame STOI, and latent representation.](repo/example.png)
 
 ## Usage
 
