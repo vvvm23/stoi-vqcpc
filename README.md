@@ -2,6 +2,9 @@
 
 Official repository for paper "Non-Intrusive Speech Intelligibility Prediction from Discrete Latent Representations".
 
+> This public repository is a work in progress! Results here bear no
+> resemblance to results in the paper!
+
 We predict the intelligibility of binaural speech signals by first extracting latent representations from raw audio. Then, a lightweight predictor over these latent representations can be trained. This results in improved performance over predicting on spectral features of the audio, despite the feature extractor not being explicitly trained for this task. In certain cases, a single layer is sufficient for strong correlations between the predictions and the ground-truth scores.
 
 This repository contains:
