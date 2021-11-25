@@ -2,6 +2,8 @@
 
 Official repository for paper "Non-Intrusive Speech Intelligibility Prediction from Discrete Latent Representations".
 
+The paper can be found on arXiv [here](https://arxiv.org/abs/2111.12531).
+
 > This public repository is a work in progress! Results here bear no
 > resemblance to results in the paper!
 
@@ -149,5 +151,17 @@ We use `toml` files to define configurations. Each one consists of three section
 
 Pretrained checkpoints for all models can be found [here](checkpoints/)
 
-### Citation
-`TODO: add citation once paper published / arXiv-ed :)`
+## Citation
+
+**Non-Intrusive Binaural Speech Intelligibility Prediction from Discrete Latent Representations**
+> Alex F. McKinney, Benjamin Cauchi
+```
+@misc{mckinney2021nonintrusive,
+      title={Non-Intrusive Binaural Speech Intelligibility Prediction from Discrete Latent Representations}, 
+      author={Alex F. McKinney and Benjamin Cauchi},
+      year={2021},
+      eprint={2111.12531},
+      archivePrefix={arXiv},
+      primaryClass={cs.SD}
+}
+```
